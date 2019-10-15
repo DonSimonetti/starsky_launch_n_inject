@@ -33,7 +33,7 @@ int main(int argc, int** argv)
 
 	CreateProcess(NULL, LPSTR(cmd.str().c_str()), NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi);
 
-	//Sleep(100);
+	Sleep(50);//Give him some time. Otherwise it may not start
 
 	if (isValidFile("addon.dll"))
 	{
