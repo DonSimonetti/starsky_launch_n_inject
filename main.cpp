@@ -48,5 +48,13 @@ int main(int argc, int** argv)
 	ResumeThread(pi.hThread);
 
 	WaitForSingleObject(pi.hProcess, INFINITE);
+
+	DWORD exitCode;
+	GetExitCodeProcess(pi.hProcess, &exitCode);
+
+	cout << "exit with " << exitCode << endl;
+
+	system("pause");
+
 	return 0;
 }
