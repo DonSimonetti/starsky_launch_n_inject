@@ -27,15 +27,14 @@ int main(int argc, int** argv)
 		ZeroMemory(&pi, sizeof(pi));
 
 		std::stringstream cmd;
-		cmd << "StarskyPC.exe /HWND=" << (int)GetConsoleHwnd() << " /SpawnerRespawn" << endl;
+		cmd << "StarskyPC.exe /HWND=" << (int)GetConsoleHwnd() << " /SpawnerRespawn";
 
-		cout << "Ready to execute " << cmd.str() << endl;
+		cout << "Ready to execute \"" << cmd.str() <<"\""<< endl;
 
 		system("pause");
 
 		CreateProcess(NULL, LPSTR(cmd.str().c_str()), NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi);
-
-		Sleep(50);//Give him some time. Otherwise it may not start
+		SuspendThread(pi.hThread);
 
 		if (isValidFile("addon.dll"))
 		{
@@ -43,12 +42,7 @@ int main(int argc, int** argv)
 			Inject(pi.dwProcessId, "addon.dll");
 		}
 
-		//SuspendThread(pi.hThread);
-
-		//system("pause");
-
 		ResumeThread(pi.hThread);
-
 		WaitForSingleObject(pi.hProcess, INFINITE);
 
 		DWORD exitCode;

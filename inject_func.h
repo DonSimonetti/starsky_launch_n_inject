@@ -45,7 +45,6 @@ bool Inject(DWORD pId, const char* dllName)
 		CloseHandle(asdc);
 		//Chiudo il processo
 		CloseHandle(h);
-		//Ritorno true perché è andato tutto a buon fine
 		return true;
 	}
 
